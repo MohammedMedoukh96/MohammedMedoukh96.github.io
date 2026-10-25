@@ -8,4 +8,8 @@ Independent mobile games by Mohammed Medoukh.
 
 [Scraper Cars Tower](https://play.google.com/store/apps/details?id=com.MM4Games.ScraperCarsTower)
 
+## Privacy policies
+
+[Vander's Vision - Privacy Policy](vanders-vision/privacy/)
+
 Contact: mm4games2020@gmail.com
