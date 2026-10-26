@@ -10,6 +10,8 @@ Independent mobile games by Mohammed Medoukh.
 
 ## Privacy policies
 
+[Square Eggs - Privacy Policy](square-eggs/privacy/)
+
 [Vander's Vision - Privacy Policy](vanders-vision/privacy/)
 
 Contact: mm4games2020@gmail.com
