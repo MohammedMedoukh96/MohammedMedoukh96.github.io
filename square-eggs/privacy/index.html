@@ -17,7 +17,7 @@
 @font-face { font-family:"Fredoka"; src:url("fonts/fredoka-semibold.woff2") format("woff2"); font-weight:600; font-display:swap; }
 :root {
   --sky1:#4fb6f0; --sky2:#bfe9ff; --card:#ffffff; --lip:#e4dbf3; --ink:#4a345c; --soft:#7c6a90;
-  --head:#2f74cf; --link:#1f63c6; --pill:#f2edfa; --egg:#ffd54a; --egg-edge:#e9a923;
+  --head:#2f74cf; --link:#1f63c6; --pill:#f2edfa; --egg:#ffd54a; --egg-edge:#e9a923; --speck:rgba(201,128,18,.55);
   --grass:#7acb4b; --grass-dark:#4f9e35; --dirt:#a8734c; --dirt-dark:#8c5c3a; --cloud:#ffffff;
 }
 @media (prefers-color-scheme: dark) {
@@ -72,15 +72,21 @@ body {
   color:var(--soft); font-size:14px; }
 h2 { display:flex; align-items:center; gap:12px; margin:30px 0 8px; color:var(--head);
   font:400 22px/1.25 "Lilita One", "Trebuchet MS", sans-serif; letter-spacing:.3px; scroll-margin-top:16px; }
-.num { flex:none; display:inline-grid; place-items:center; width:34px; height:40px; color:#4a345c; font-size:18px;
-  background:radial-gradient(circle at 35% 30%, #fff6c8 0 18%, var(--egg) 19% 100%);
-  border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; box-shadow:inset 0 -4px 0 var(--egg-edge); }
+/* a golden square egg, like the eggs in the game: rounded square, light top-left, shaded bottom-right, speckles */
+.num { flex:none; display:inline-grid; place-items:center; width:38px; height:38px; padding:0 3px 3px 0;
+  color:#4a345c; font-size:19px; line-height:1; border-radius:31%;
+  background:
+    radial-gradient(circle at 74% 22%, var(--speck) 0 2.2px, transparent 2.8px),
+    radial-gradient(circle at 84% 33%, var(--speck) 0 1.8px, transparent 2.4px),
+    radial-gradient(circle at 19% 72%, var(--speck) 0 1.8px, transparent 2.4px),
+    linear-gradient(150deg, #fff4b8 0%, var(--egg) 42%, var(--egg) 100%);
+  box-shadow:inset -4px -5px 0 var(--egg-edge), 0 3px 0 rgba(74,52,92,.16); }
 p, li { overflow-wrap:anywhere; }
 p { margin:8px 0; }
 ul { list-style:none; margin:8px 0; padding:0; }
 li { position:relative; padding-left:30px; margin:8px 0; }
-li::before { content:""; position:absolute; left:6px; top:.5em; width:12px; height:15px;
-  background:var(--egg); border-radius:50% 50% 46% 46% / 58% 58% 42% 42%; box-shadow:inset 0 -2px 0 var(--egg-edge); }
+li::before { content:""; position:absolute; left:6px; top:.52em; width:14px; height:14px; border-radius:31%;
+  background:linear-gradient(150deg, #fff4b8 0%, var(--egg) 48%); box-shadow:inset -2px -2.5px 0 var(--egg-edge); }
 a { color:var(--link); text-decoration-thickness:2px; text-underline-offset:2px; }
 .ground { position:relative; margin-top:56px; padding:46px 16px 34px; text-align:center; color:#fff;
   background:
@@ -108,10 +114,10 @@ a { color:var(--link); text-decoration-thickness:2px; text-underline-offset:2px;
 <div class="ribbon"><h1>Privacy Policy</h1></div>
 </header>
 <main class="card">
-<p class="date">Last updated: 27 October 2026</p>
+<p class="date">Last updated: 28 October 2026</p>
 <p>Square Eggs (&quot;the game&quot;) is made by MM4Games (Mohammed Medoukh) (&quot;we&quot;, &quot;us&quot;). This policy explains what information the game uses, why, and the choices you have. If you have questions, contact us at <a href="mailto:mm4games2020@gmail.com">mm4games2020@gmail.com</a>.</p>
 <h2 id="device"><span class="num" aria-hidden="true">1</span><span>Information saved on your device</span></h2>
-<p>Your game progress (levels, golden eggs, coins and skins), your settings (sound, vibration and difficulty), your nickname and your age group are saved only on your device. We cannot see this information.</p>
+<p>Your game progress (levels, stars, coins and skins), your settings (sound, vibration and difficulty), your nickname and your age group are saved only on your device. We cannot see this information.</p>
 <p>At first launch the game asks how old you are, but it only keeps your age group (under 13, 13 to 17, or 18 and over) - never your exact age or date of birth. The age group is used only to choose safe settings for you (see sections 3 and 4).</p>
 <h2 id="leaderboard"><span class="num" aria-hidden="true">2</span><span>Global leaderboard (Unity Gaming Services)</span></h2>
 <p>To show the global leaderboard, the game signs in anonymously to Unity Gaming Services, provided by Unity Technologies. This happens after you choose your nickname and creates a random player ID; no email address, password or real name is needed. Your nickname, total score, number of levels cleared and the skin you use are sent to the leaderboard and are visible to other players. Unity also processes your device&#x27;s IP address to provide the service.</p>
@@ -121,15 +127,16 @@ a { color:var(--link); text-decoration-thickness:2px; text-underline-offset:2px;
 <li>If you see a rude or offensive name, tap it in the leaderboard to hide that player on your device or to report the name to us. We review reports and remove offensive names.</li>
 </ul>
 <h2 id="ads"><span class="num" aria-hidden="true">3</span><span>Ads (Unity LevelPlay and its ad partners)</span></h2>
-<p>The game shows only optional rewarded videos: you choose to watch one to revive after a fall or to unlock a skin. There are no banners and no ads that appear by themselves. Ads are delivered by Unity LevelPlay and the ad networks it works with, currently Unity Ads and Google AdMob. To deliver, measure and limit ads and to prevent fraud, these partners may collect information such as your device&#x27;s advertising identifier, IP address, device model and operating system, and how you interact with the ads.</p>
+<p>The game shows only optional videos: you choose to watch one to revive after a fall or to unlock a skin. There are no banners and no ads that appear by themselves. Ads are delivered by Unity LevelPlay and the ad networks it works with, currently Unity Ads and Google AdMob. To deliver, measure and limit ads and to prevent fraud, these partners may collect information such as your device&#x27;s advertising identifier, IP address, device model and operating system, and how you interact with the ads.</p>
+<p>Ads are family-friendly for every player, whatever their age: our ad partners are set to show only ads suitable for all ages, and ads for dating apps and ads with sexual or suggestive content are blocked. If you ever see an ad that seems inappropriate, tell us at <a href="mailto:mm4games2020@gmail.com">mm4games2020@gmail.com</a> and we will block it.</p>
 <ul>
-<li>Players under 13: ads are requested as child-directed (COPPA), are never personalised, come only from ad networks certified for Google Play&#x27;s Families program, and the advertising identifier is not used.</li>
+<li>Players under 13: ads are requested as child-directed (COPPA), are never personalised, come only from ad networks certified for Google Play&#x27;s Families program, and the advertising identifier is not used. Their videos can be closed after 5 seconds, and they still get the reward.</li>
 <li>Players 13 to 17: ads are never personalised.</li>
 <li>Players 18 and over: ads may be personalised. In the European Economic Area, the UK and Switzerland the game first asks for your consent with Google&#x27;s consent form, and you can change your choice at any time in Settings &gt; Ad choices. You can also limit personalised ads in your device settings (on Android: Settings &gt; Google &gt; Ads); on iPhone and iPad the advertising identifier is only used if you allow tracking.</li>
 </ul>
 <p>We do not sell your personal information, and we don&#x27;t receive the information that the ad partners collect.</p>
 <h2 id="children"><span class="num" aria-hidden="true">4</span><span>Children</span></h2>
-<p>Square Eggs is made for everyone, including children. The age question is neutral: it has no default age and doesn&#x27;t hint at any limit. Players under 13 can only pick a generated nickname, their ads are child-directed and never personalised, sharing to other apps is turned off, and a grown-up check (a small math question) appears before anything opens outside the game, such as a website or an email.</p>
+<p>Square Eggs is made for everyone, including children. The age question is neutral: it has no default age and doesn&#x27;t hint at any limit. Players under 13 can only pick a generated nickname, their ads are child-directed, never personalised and can be closed after 5 seconds, sharing to other apps is turned off, and a grown-up check (a small math question) appears before anything opens outside the game, such as a website or an email.</p>
 <p>We do not knowingly collect personal information from children beyond what is described in this policy. If you believe a child has given us personal information, contact us and we will delete it.</p>
 <h2 id="delete-data"><span class="num" aria-hidden="true">5</span><span>Deleting your data</span></h2>
 <ul>
