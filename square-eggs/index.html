@@ -57,18 +57,17 @@ body {
 .lead { margin:0 0 4px; font-size:19px; }
 .lead-ar { margin:0 0 18px; font-size:19px; }
 .free { display:inline-block; margin:0 0 18px; padding:4px 16px; border-radius:999px; background:var(--pill); color:var(--soft); font-size:15px; }
-.btn {
-  display:flex; align-items:center; justify-content:center; gap:14px; width:100%; margin:0 0 16px;
-  padding:14px 18px 16px; border-radius:22px; color:#fff; text-decoration:none; text-align:left;
-  font:400 23px/1.1 "Lilita One", "Trebuchet MS", sans-serif; letter-spacing:.3px;
-  transition:transform .08s ease;
-}
-.btn small { display:block; font:600 14px/1.3 "Fredoka", sans-serif; opacity:.92; letter-spacing:0; }
-.btn svg { flex:none; width:34px; height:34px; }
-.btn:active { transform:translateY(4px); }
-.ios { background:var(--ios); box-shadow:inset 0 -6px 0 rgba(0,0,0,.12), 0 6px 0 var(--ios-lip); }
-.and { background:var(--and); box-shadow:inset 0 -6px 0 rgba(0,0,0,.12), 0 6px 0 var(--and-lip); }
-.btn.mine { outline:4px solid #ffd54a; outline-offset:3px; }
+/* Official store badges, unmodified (Apple: black badge, App Store first, clear space = 1/4 height;
+   Google: same height or larger). Both shown 56 px high. Google's PNG has 41 px transparent padding on a
+   646x250 image (inner badge 564x168), so it is drawn 83.3 px high with -13.7 px margins. */
+.badges { display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-start; gap:18px 22px; margin:18px 0 10px; }
+.badge { display:flex; flex-direction:column; align-items:center; gap:8px; text-decoration:none; color:var(--soft);
+  font-size:14px; line-height:1.2; border-radius:12px; }
+.badge img { display:block; height:56px; width:auto; }
+.badge.gp .art { display:block; height:56px; overflow:visible; }
+.badge.gp img { height:83.33px; margin:-13.67px; }
+.badge:focus-visible { outline:3px solid #ffd54a; outline-offset:6px; }
+.badge:active img { transform:translateY(2px); }
 .status { min-height:1.6em; margin:4px 0 0; color:var(--soft); font-size:15px; }
 .hint { display:none; margin:14px 0 4px; padding:14px 16px; border-radius:18px; background:var(--hint);
   border:3px dashed var(--hint-edge); text-align:left; font-size:16px; }
@@ -87,7 +86,7 @@ body {
   font:400 17px/1.6 "Lilita One", "Trebuchet MS", sans-serif; letter-spacing:.4px; }
 .ground a { color:#fff; }
 [dir="rtl"] { font-family:"Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif; }
-@media (max-width:420px) { .btn { font-size:21px; } .card { padding:22px 16px 20px; } }
+@media (max-width:420px) { .card { padding:22px 16px 20px; } }
 </style>
 </head>
 <body>
@@ -99,14 +98,18 @@ body {
     <p class="lead-ar" lang="ar" dir="rtl">كدّس البيض، واصعد المراحل، وافتح الأشكال الجديدة.</p>
     <p class="free">Free · مجانية</p>
 
-    <a id="ios" class="btn ios" href="https://apps.apple.com/app/id6741331299">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="1.5" width="12" height="21" rx="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="19" r="1.2" fill="#fff"/></svg>
-      <span>App Store<small>iPhone &amp; iPad</small></span>
-    </a>
-    <a id="and" class="btn and" href="https://play.google.com/store/apps/details?id=com.MM4Games.squareEggs">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5v17l9-8.5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M14 12l4.5-2.6c1 .6 1 2.6 0 3.2L14 12z" fill="#fff"/></svg>
-      <span>Google Play<small>Android</small></span>
-    </a>
+    <div class="badges">
+      <a id="ios" class="badge" href="https://apps.apple.com/app/id6741331299">
+        <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1738281600"
+             width="168" height="56" alt="Download on the App Store">
+        <span>iPhone &amp; iPad</span>
+      </a>
+      <a id="and" class="badge gp" href="https://play.google.com/store/apps/details?id=com.MM4Games.squareEggs">
+        <span class="art"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+             width="215" height="83" alt="Get it on Google Play"></span>
+        <span>Android</span>
+      </a>
+    </div>
 
     <p id="status" class="status" aria-live="polite"></p>
 
@@ -135,7 +138,6 @@ body {
   function clean(v, d) { v = (v || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 24); return v || d; }
   var src = clean(q.get("src"), "direct");
   var camp = clean(q.get("c"), "update");
-  var stay = q.has("stay");   // ?stay = show the page without opening a store (for previews)
 
   var ua = navigator.userAgent || "";
   var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
@@ -181,14 +183,10 @@ body {
   iosBtn.addEventListener("click", function (e) { if (isIOS) { e.preventDefault(); openIOS(); } });
   andBtn.addEventListener("click", function (e) { if (isAndroid) { e.preventDefault(); openAndroid(); } });
 
-  if (isIOS) { iosBtn.classList.add("mine"); andBtn.parentNode.insertBefore(iosBtn, andBtn); }
-  else if (isAndroid) { andBtn.classList.add("mine"); iosBtn.parentNode.insertBefore(andBtn, iosBtn); }
-  else { document.getElementById("qr").classList.add("show"); }
+  // Apple asks for the App Store badge first in a lineup, so the order stays the same on every device
+  if (!isIOS && !isAndroid) document.getElementById("qr").classList.add("show");
 
-  if (!stay) {
-    if (isIOS) setTimeout(openIOS, 250);
-    else if (isAndroid) setTimeout(openAndroid, 250);
-  }
+  // No automatic store opening: the visitor sees the page first and taps the store badge themselves.
 })();
 </script>
 </body>
