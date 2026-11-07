@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Square Eggs: Stack &amp; Climb – Free on iPhone, iPad &amp; Android</title>
+<meta name="description" content="Stack eggs, climb the levels and unlock skins. Square Eggs is free on the App Store and Google Play.">
+<link rel="canonical" href="https://mohammedmedoukh96.github.io/square-eggs/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mohammedmedoukh96.github.io/square-eggs/">
+<meta property="og:title" content="Square Eggs: Stack &amp; Climb">
+<meta property="og:description" content="Free on iPhone, iPad and Android. Tap to get it from your store.">
+<meta property="og:image" content="https://mohammedmedoukh96.github.io/square-eggs/privacy/icon.png">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#4fb6f0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1636" media="(prefers-color-scheme: dark)">
+<meta name="apple-itunes-app" content="app-id=6741331299">
+<link rel="icon" type="image/png" href="privacy/favicon.png">
+<link rel="apple-touch-icon" href="privacy/icon.png">
+<link rel="preload" href="privacy/fonts/lilitaone.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="privacy/fonts/fredoka-semibold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family:"Lilita One"; src:url("privacy/fonts/lilitaone.woff2") format("woff2"); font-display:swap; }
+@font-face { font-family:"Fredoka"; src:url("privacy/fonts/fredoka-semibold.woff2") format("woff2"); font-weight:600; font-display:swap; }
+:root {
+  --sky1:#4fb6f0; --sky2:#bfe9ff; --card:#ffffff; --lip:#e4dbf3; --ink:#4a345c; --soft:#7c6a90;
+  --pill:#f2edfa; --cloud:#ffffff; --grass:#7acb4b; --grass-dark:#4f9e35; --dirt:#a8734c;
+  --ios:#2f74cf; --ios-lip:#1f4f96; --and:#3fae4f; --and-lip:#2a7a36; --hint:#fff6d6; --hint-edge:#f0c64a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sky1:#0f1636; --sky2:#2c3b7d; --card:#251f45; --lip:#171331; --ink:#efe9ff; --soft:#b9abd8;
+    --pill:#342c5c; --cloud:#c9d4ff; --grass:#3f8a32; --grass-dark:#2c6624; --dirt:#5e4030;
+    --hint:#3a3160; --hint-edge:#b8902a;
+  }
+}
+* { box-sizing:border-box; }
+html { background:var(--sky2); }
+body {
+  margin:0; min-height:100vh; color:var(--ink); overflow-x:hidden;
+  font:600 17px/1.6 "Fredoka", "Trebuchet MS", "Segoe UI", Roboto, Arial, sans-serif;
+  background:linear-gradient(180deg, var(--sky1) 0%, var(--sky2) 520px, var(--sky2) 100%);
+}
+.sky { position:absolute; inset:0 0 auto 0; height:360px; pointer-events:none; overflow:hidden; }
+.cloud { position:absolute; width:180px; height:56px; border-radius:40px; background:var(--cloud); opacity:.92; }
+.cloud::before, .cloud::after { content:""; position:absolute; background:var(--cloud); border-radius:50%; }
+.cloud::before { width:84px; height:84px; left:26px; top:-40px; }
+.cloud::after { width:64px; height:64px; left:92px; top:-28px; }
+.c1 { left:-40px; top:120px; transform:scale(.9); } .c2 { right:-30px; top:60px; transform:scale(1.1); }
+@media (prefers-color-scheme: dark) { .cloud { opacity:.16; } }
+.wrap { position:relative; max-width:560px; margin:0 auto; padding:20px 16px 0; text-align:center; }
+.logo { width:min(100%, 440px); height:auto; filter:drop-shadow(0 8px 0 rgba(40,20,80,.12)); }
+.card {
+  position:relative; margin-top:6px; background:var(--card); border-radius:30px; padding:26px 22px 24px;
+  box-shadow:0 12px 0 var(--lip), 0 26px 46px rgba(30,20,70,.20);
+}
+.lead { margin:0 0 4px; font-size:19px; }
+.lead-ar { margin:0 0 18px; font-size:19px; }
+.free { display:inline-block; margin:0 0 18px; padding:4px 16px; border-radius:999px; background:var(--pill); color:var(--soft); font-size:15px; }
+.btn {
+  display:flex; align-items:center; justify-content:center; gap:14px; width:100%; margin:0 0 16px;
+  padding:14px 18px 16px; border-radius:22px; color:#fff; text-decoration:none; text-align:left;
+  font:400 23px/1.1 "Lilita One", "Trebuchet MS", sans-serif; letter-spacing:.3px;
+  transition:transform .08s ease;
+}
+.btn small { display:block; font:600 14px/1.3 "Fredoka", sans-serif; opacity:.92; letter-spacing:0; }
+.btn svg { flex:none; width:34px; height:34px; }
+.btn:active { transform:translateY(4px); }
+.ios { background:var(--ios); box-shadow:inset 0 -6px 0 rgba(0,0,0,.12), 0 6px 0 var(--ios-lip); }
+.and { background:var(--and); box-shadow:inset 0 -6px 0 rgba(0,0,0,.12), 0 6px 0 var(--and-lip); }
+.btn.mine { outline:4px solid #ffd54a; outline-offset:3px; }
+.status { min-height:1.6em; margin:4px 0 0; color:var(--soft); font-size:15px; }
+.hint { display:none; margin:14px 0 4px; padding:14px 16px; border-radius:18px; background:var(--hint);
+  border:3px dashed var(--hint-edge); text-align:left; font-size:16px; }
+.hint.show { display:block; }
+.hint p { margin:4px 0; }
+.hint .ar { text-align:right; }
+.hint b { white-space:nowrap; }
+.qr { display:none; margin:18px 0 0; }
+.qr.show { display:block; }
+.qr svg { border-radius:14px; box-shadow:0 4px 0 var(--lip); }
+.qr p { margin:8px 0 0; color:var(--soft); font-size:15px; }
+.ground { position:relative; margin-top:52px; padding:42px 16px 30px; text-align:center; color:#fff;
+  background:
+    radial-gradient(circle at 18px -6px, var(--grass) 22px, transparent 23px) 0 0 / 44px 30px repeat-x,
+    linear-gradient(180deg, var(--grass) 0 26px, var(--grass-dark) 26px 32px, var(--dirt) 32px 100%);
+  font:400 17px/1.6 "Lilita One", "Trebuchet MS", sans-serif; letter-spacing:.4px; }
+.ground a { color:#fff; }
+[dir="rtl"] { font-family:"Segoe UI", Tahoma, "Noto Sans Arabic", Arial, sans-serif; }
+@media (max-width:420px) { .btn { font-size:21px; } .card { padding:22px 16px 20px; } }
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><div class="cloud c1"></div><div class="cloud c2"></div></div>
+<div class="wrap">
+  <img class="logo" src="privacy/logo.webp" srcset="privacy/logo.webp 1x, privacy/logo@2x.webp 2x" width="720" height="423" alt="Square Eggs">
+  <main class="card">
+    <p class="lead">Stack eggs, climb the levels and unlock skins.</p>
+    <p class="lead-ar" lang="ar" dir="rtl">كدّس البيض، واصعد المراحل، وافتح الأشكال الجديدة.</p>
+    <p class="free">Free · مجانية</p>
+
+    <a id="ios" class="btn ios" href="https://apps.apple.com/app/id6741331299">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="1.5" width="12" height="21" rx="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="19" r="1.2" fill="#fff"/></svg>
+      <span>App Store<small>iPhone &amp; iPad</small></span>
+    </a>
+    <a id="and" class="btn and" href="https://play.google.com/store/apps/details?id=com.MM4Games.squareEggs">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5v17l9-8.5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M14 12l4.5-2.6c1 .6 1 2.6 0 3.2L14 12z" fill="#fff"/></svg>
+      <span>Google Play<small>Android</small></span>
+    </a>
+
+    <p id="status" class="status" aria-live="polite"></p>
+
+    <div id="hint" class="hint" role="note">
+      <p>Nothing opened? Tap <b>⋯</b> or <b>⋮</b> at the top of the screen, choose <b>Open in browser</b>, then tap the button again.</p>
+      <p class="ar" lang="ar" dir="rtl">لم يُفتح المتجر؟ اضغط <b>⋯</b> أو <b>⋮</b> أعلى الشاشة، واختر <b>الفتح في المتصفح</b>، ثم اضغط الزر مرة أخرى.</p>
+    </div>
+
+    <div id="qr" class="qr">
+      <svg viewBox="0 0 37 37" width="168" height="168" role="img" aria-label="QR code"><rect width="37" height="37" fill="#fff"/><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM12,2H13V3H12zM15,2H16V3H15zM16,2H17V3H16zM20,2H21V3H20zM23,2H24V3H23zM24,2H25V3H24zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM31,2H32V3H31zM32,2H33V3H32zM33,2H34V3H33zM34,2H35V3H34zM2,3H3V4H2zM8,3H9V4H8zM10,3H11V4H10zM11,3H12V4H11zM12,3H13V4H12zM13,3H14V4H13zM22,3H23V4H22zM23,3H24V4H23zM24,3H25V4H24zM28,3H29V4H28zM34,3H35V4H34zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM11,4H12V5H11zM13,4H14V5H13zM14,4H15V5H14zM16,4H17V5H16zM17,4H18V5H17zM18,4H19V5H18zM22,4H23V5H22zM23,4H24V5H23zM24,4H25V5H24zM28,4H29V5H28zM30,4H31V5H30zM31,4H32V5H31zM32,4H33V5H32zM34,4H35V5H34zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM11,5H12V6H11zM12,5H13V6H12zM13,5H14V6H13zM14,5H15V6H14zM16,5H17V6H16zM18,5H19V6H18zM19,5H20V6H19zM23,5H24V6H23zM25,5H26V6H25zM26,5H27V6H26zM28,5H29V6H28zM30,5H31V6H30zM31,5H32V6H31zM32,5H33V6H32zM34,5H35V6H34zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM11,6H12V7H11zM12,6H13V7H12zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM16,6H17V7H16zM17,6H18V7H17zM18,6H19V7H18zM19,6H20V7H19zM21,6H22V7H21zM25,6H26V7H25zM28,6H29V7H28zM30,6H31V7H30zM31,6H32V7H31zM32,6H33V7H32zM34,6H35V7H34zM2,7H3V8H2zM8,7H9V8H8zM12,7H13V8H12zM13,7H14V8H13zM17,7H18V8H17zM19,7H20V8H19zM20,7H21V8H20zM22,7H23V8H22zM24,7H25V8H24zM28,7H29V8H28zM34,7H35V8H34zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM26,8H27V9H26zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM31,8H32V9H31zM32,8H33V9H32zM33,8H34V9H33zM34,8H35V9H34zM10,9H11V10H10zM11,9H12V10H11zM13,9H14V10H13zM14,9H15V10H14zM17,9H18V10H17zM18,9H19V10H18zM21,9H22V10H21zM24,9H25V10H24zM2,10H3V11H2zM8,10H9V11H8zM10,10H11V11H10zM11,10H12V11H11zM12,10H13V11H12zM13,10H14V11H13zM15,10H16V11H15zM16,10H17V11H16zM18,10H19V11H18zM19,10H20V11H19zM22,10H23V11H22zM24,10H25V11H24zM26,10H27V11H26zM27,10H28V11H27zM28,10H29V11H28zM31,10H32V11H31zM32,10H33V11H32zM33,10H34V11H33zM3,11H4V12H3zM4,11H5V12H4zM5,11H6V12H5zM6,11H7V12H6zM11,11H12V12H11zM12,11H13V12H12zM13,11H14V12H13zM15,11H16V12H15zM17,11H18V12H17zM20,11H21V12H20zM21,11H22V12H21zM24,11H25V12H24zM25,11H26V12H25zM30,11H31V12H30zM31,11H32V12H31zM32,11H33V12H32zM2,12H3V13H2zM5,12H6V13H5zM6,12H7V13H6zM7,12H8V13H7zM8,12H9V13H8zM13,12H14V13H13zM14,12H15V13H14zM15,12H16V13H15zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM20,12H21V13H20zM22,12H23V13H22zM24,12H25V13H24zM27,12H28V13H27zM30,12H31V13H30zM32,12H33V13H32zM33,12H34V13H33zM2,13H3V14H2zM3,13H4V14H3zM4,13H5V14H4zM7,13H8V14H7zM10,13H11V14H10zM11,13H12V14H11zM15,13H16V14H15zM21,13H22V14H21zM22,13H23V14H22zM24,13H25V14H24zM26,13H27V14H26zM27,13H28V14H27zM29,13H30V14H29zM30,13H31V14H30zM31,13H32V14H31zM32,13H33V14H32zM34,13H35V14H34zM3,14H4V15H3zM4,14H5V15H4zM8,14H9V15H8zM9,14H10V15H9zM14,14H15V15H14zM15,14H16V15H15zM22,14H23V15H22zM25,14H26V15H25zM26,14H27V15H26zM28,14H29V15H28zM2,15H3V16H2zM4,15H5V16H4zM5,15H6V16H5zM7,15H8V16H7zM10,15H11V16H10zM13,15H14V16H13zM14,15H15V16H14zM15,15H16V16H15zM19,15H20V16H19zM21,15H22V16H21zM22,15H23V16H22zM24,15H25V16H24zM25,15H26V16H25zM28,15H29V16H28zM29,15H30V16H29zM33,15H34V16H33zM34,15H35V16H34zM3,16H4V17H3zM4,16H5V17H4zM6,16H7V17H6zM7,16H8V17H7zM8,16H9V17H8zM10,16H11V17H10zM12,16H13V17H12zM13,16H14V17H13zM17,16H18V17H17zM18,16H19V17H18zM20,16H21V17H20zM23,16H24V17H23zM24,16H25V17H24zM27,16H28V17H27zM28,16H29V17H28zM31,16H32V17H31zM32,16H33V17H32zM33,16H34V17H33zM2,17H3V18H2zM3,17H4V18H3zM13,17H14V18H13zM15,17H16V18H15zM16,17H17V18H16zM18,17H19V18H18zM20,17H21V18H20zM21,17H22V18H21zM22,17H23V18H22zM27,17H28V18H27zM30,17H31V18H30zM31,17H32V18H31zM32,17H33V18H32zM34,17H35V18H34zM3,18H4V19H3zM4,18H5V19H4zM5,18H6V19H5zM6,18H7V19H6zM8,18H9V19H8zM9,18H10V19H9zM14,18H15V19H14zM17,18H18V19H17zM19,18H20V19H19zM20,18H21V19H20zM24,18H25V19H24zM25,18H26V19H25zM26,18H27V19H26zM27,18H28V19H27zM29,18H30V19H29zM30,18H31V19H30zM34,18H35V19H34zM5,19H6V20H5zM7,19H8V20H7zM9,19H10V20H9zM12,19H13V20H12zM15,19H16V20H15zM17,19H18V20H17zM18,19H19V20H18zM21,19H22V20H21zM22,19H23V20H22zM25,19H26V20H25zM28,19H29V20H28zM31,19H32V20H31zM32,19H33V20H32zM34,19H35V20H34zM4,20H5V21H4zM6,20H7V21H6zM8,20H9V21H8zM12,20H13V21H12zM16,20H17V21H16zM17,20H18V21H17zM20,20H21V21H20zM21,20H22V21H21zM22,20H23V21H22zM24,20H25V21H24zM25,20H26V21H25zM26,20H27V21H26zM27,20H28V21H27zM28,20H29V21H28zM29,20H30V21H29zM31,20H32V21H31zM32,20H33V21H32zM33,20H34V21H33zM34,20H35V21H34zM3,21H4V22H3zM7,21H8V22H7zM10,21H11V22H10zM17,21H18V22H17zM18,21H19V22H18zM20,21H21V22H20zM22,21H23V22H22zM24,21H25V22H24zM26,21H27V22H26zM27,21H28V22H27zM30,21H31V22H30zM31,21H32V22H31zM32,21H33V22H32zM34,21H35V22H34zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM9,22H10V23H9zM10,22H11V23H10zM11,22H12V23H11zM12,22H13V23H12zM16,22H17V23H16zM17,22H18V23H17zM20,22H21V23H20zM22,22H23V23H22zM25,22H26V23H25zM26,22H27V23H26zM27,22H28V23H27zM30,22H31V23H30zM31,22H32V23H31zM2,23H3V24H2zM4,23H5V24H4zM7,23H8V24H7zM16,23H17V24H16zM19,23H20V24H19zM20,23H21V24H20zM21,23H22V24H21zM24,23H25V24H24zM25,23H26V24H25zM26,23H27V24H26zM27,23H28V24H27zM29,23H30V24H29zM30,23H31V24H30zM31,23H32V24H31zM2,24H3V25H2zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM8,24H9V25H8zM11,24H12V25H11zM13,24H14V25H13zM14,24H15V25H14zM16,24H17V25H16zM20,24H21V25H20zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM27,24H28V25H27zM28,24H29V25H28zM30,24H31V25H30zM31,24H32V25H31zM33,24H34V25H33zM2,25H3V26H2zM5,25H6V26H5zM6,25H7V26H6zM11,25H12V26H11zM15,25H16V26H15zM17,25H18V26H17zM18,25H19V26H18zM21,25H22V26H21zM27,25H28V26H27zM32,25H33V26H32zM33,25H34V26H33zM34,25H35V26H34zM2,26H3V27H2zM3,26H4V27H3zM8,26H9V27H8zM9,26H10V27H9zM12,26H13V27H12zM13,26H14V27H13zM16,26H17V27H16zM18,26H19V27H18zM20,26H21V27H20zM21,26H22V27H21zM22,26H23V27H22zM25,26H26V27H25zM26,26H27V27H26zM27,26H28V27H27zM28,26H29V27H28zM29,26H30V27H29zM30,26H31V27H30zM31,26H32V27H31zM34,26H35V27H34zM10,27H11V28H10zM11,27H12V28H11zM13,27H14V28H13zM14,27H15V28H14zM17,27H18V28H17zM18,27H19V28H18zM19,27H20V28H19zM21,27H22V28H21zM22,27H23V28H22zM23,27H24V28H23zM26,27H27V28H26zM30,27H31V28H30zM32,27H33V28H32zM34,27H35V28H34zM2,28H3V29H2zM3,28H4V29H3zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM7,28H8V29H7zM8,28H9V29H8zM12,28H13V29H12zM15,28H16V29H15zM17,28H18V29H17zM19,28H20V29H19zM22,28H23V29H22zM24,28H25V29H24zM25,28H26V29H25zM26,28H27V29H26zM28,28H29V29H28zM30,28H31V29H30zM32,28H33V29H32zM33,28H34V29H33zM2,29H3V30H2zM8,29H9V30H8zM14,29H15V30H14zM15,29H16V30H15zM16,29H17V30H16zM17,29H18V30H17zM19,29H20V30H19zM20,29H21V30H20zM25,29H26V30H25zM26,29H27V30H26zM30,29H31V30H30zM31,29H32V30H31zM32,29H33V30H32zM33,29H34V30H33zM34,29H35V30H34zM2,30H3V31H2zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM8,30H9V31H8zM11,30H12V31H11zM12,30H13V31H12zM13,30H14V31H13zM18,30H19V31H18zM22,30H23V31H22zM26,30H27V31H26zM27,30H28V31H27zM28,30H29V31H28zM29,30H30V31H29zM30,30H31V31H30zM31,30H32V31H31zM33,30H34V31H33zM2,31H3V32H2zM4,31H5V32H4zM5,31H6V32H5zM6,31H7V32H6zM8,31H9V32H8zM12,31H13V32H12zM13,31H14V32H13zM15,31H16V32H15zM20,31H21V32H20zM21,31H22V32H21zM22,31H23V32H22zM23,31H24V32H23zM24,31H25V32H24zM25,31H26V32H25zM27,31H28V32H27zM29,31H30V32H29zM30,31H31V32H30zM31,31H32V32H31zM33,31H34V32H33zM34,31H35V32H34zM2,32H3V33H2zM4,32H5V33H4zM5,32H6V33H5zM6,32H7V33H6zM8,32H9V33H8zM12,32H13V33H12zM14,32H15V33H14zM15,32H16V33H15zM17,32H18V33H17zM21,32H22V33H21zM23,32H24V33H23zM27,32H28V33H27zM29,32H30V33H29zM30,32H31V33H30zM33,32H34V33H33zM34,32H35V33H34zM2,33H3V34H2zM8,33H9V34H8zM12,33H13V34H12zM14,33H15V34H14zM20,33H21V34H20zM21,33H22V34H21zM22,33H23V34H22zM24,33H25V34H24zM29,33H30V34H29zM30,33H31V34H30zM31,33H32V34H31zM32,33H33V34H32zM2,34H3V35H2zM3,34H4V35H3zM4,34H5V35H4zM5,34H6V35H5zM6,34H7V35H6zM7,34H8V35H7zM8,34H9V35H8zM10,34H11V35H10zM11,34H12V35H11zM12,34H13V35H12zM14,34H15V35H14zM16,34H17V35H16zM17,34H18V35H17zM19,34H20V35H19zM20,34H21V35H20zM21,34H22V35H21zM24,34H25V35H24zM25,34H26V35H25zM26,34H27V35H26zM28,34H29V35H28zM29,34H30V35H29zM31,34H32V35H31zM33,34H34V35H33z" fill="#2a1f3d"/></svg>
+      <p>On a computer? Scan with your phone · امسح الرمز بهاتفك</p>
+    </div>
+  </main>
+</div>
+<footer class="ground"><a href="/">MM4Games</a> &middot; <a href="privacy/">Privacy Policy</a></footer>
+
+<script>
+(function () {
+  // ---- store details
+  var PKG = "com.MM4Games.squareEggs";
+  var APPLE_ID = "6741331299";
+  var APPLE_PT = "";   // App Store Connect provider token (Analytics > Campaigns). Empty = no campaign tracking on iOS.
+
+  // ---- where the visitor came from: ?src=instagram&c=launch2  (letters, digits, - and _ only)
+  var q = new URLSearchParams(location.search);
+  function clean(v, d) { v = (v || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 24); return v || d; }
+  var src = clean(q.get("src"), "direct");
+  var camp = clean(q.get("c"), "update");
+  var stay = q.has("stay");   // ?stay = show the page without opening a store (for previews)
+
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/i.test(ua);
+  // in-app browsers of social apps (Instagram, Facebook, Messenger, TikTok, X, Threads, Snapchat, LINE)
+  var inApp = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger|musical_ly|Bytedance|TikTok|Twitter|Threads|Barcelona|Snapchat|Line\//i.test(ua);
+
+  var appleQuery = APPLE_PT ? "?pt=" + APPLE_PT + "&ct=" + encodeURIComponent(src + "-" + camp) + "&mt=8" : "";
+  var appleUrl = "https://apps.apple.com/app/id" + APPLE_ID + appleQuery;
+  var appleScheme = "itms-apps://apps.apple.com/app/id" + APPLE_ID + appleQuery;
+  var referrer = "utm_source=" + src + "&utm_medium=social&utm_campaign=" + camp;
+  var playUrl = "https://play.google.com/store/apps/details?id=" + PKG + "&referrer=" + encodeURIComponent(referrer);
+  var playIntent = "intent://details?id=" + PKG + "&referrer=" + encodeURIComponent(referrer) +
+                   "#Intent;scheme=market;package=com.android.vending;S.browser_fallback_url=" +
+                   encodeURIComponent(playUrl) + ";end";
+
+  var iosBtn = document.getElementById("ios"), andBtn = document.getElementById("and");
+  var status = document.getElementById("status"), hint = document.getElementById("hint");
+  iosBtn.href = appleUrl;
+  andBtn.href = playUrl;
+
+  var hintTimer = 0;
+  function watch() {
+    // if the page is still visible a moment later, the store didn't open: show how to leave the in-app browser
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function () {
+      if (!document.hidden) { hint.classList.add("show"); status.textContent = ""; }
+    }, 1800);
+  }
+  document.addEventListener("visibilitychange", function () { if (document.hidden) clearTimeout(hintTimer); });
+
+  function openIOS() {
+    status.textContent = "Opening the App Store… · جارٍ فتح App Store…";
+    if (inApp) { location.href = appleScheme; watch(); }
+    else { location.href = appleUrl; }
+  }
+  function openAndroid() {
+    status.textContent = "Opening Google Play… · جارٍ فتح Google Play…";
+    location.href = playIntent;   // opens the Play Store app; falls back to the web page by itself
+    if (inApp) watch();
+  }
+
+  iosBtn.addEventListener("click", function (e) { if (isIOS) { e.preventDefault(); openIOS(); } });
+  andBtn.addEventListener("click", function (e) { if (isAndroid) { e.preventDefault(); openAndroid(); } });
+
+  if (isIOS) { iosBtn.classList.add("mine"); andBtn.parentNode.insertBefore(iosBtn, andBtn); }
+  else if (isAndroid) { andBtn.classList.add("mine"); iosBtn.parentNode.insertBefore(andBtn, iosBtn); }
+  else { document.getElementById("qr").classList.add("show"); }
+
+  if (!stay) {
+    if (isIOS) setTimeout(openIOS, 250);
+    else if (isAndroid) setTimeout(openAndroid, 250);
+  }
+})();
+</script>
+</body>
+</html>
