@@ -34,6 +34,9 @@
     --title: "LuckiestGuy", "BalooAr", system-ui, sans-serif;
     --ar-title: "BalooAr", system-ui, sans-serif;
     --body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", Tahoma, Arial, sans-serif;
+    /* dark outline around white text on the sky (8 directions + a small drop), so it reads on every shade of blue */
+    --outline: -2px -2px 0 var(--navy), 0 -2px 0 var(--navy), 2px -2px 0 var(--navy), 2px 0 0 var(--navy),
+               2px 2px 0 var(--navy), 0 2px 0 var(--navy), -2px 2px 0 var(--navy), -2px 0 0 var(--navy), 0 3.5px 0 var(--navy);
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -63,7 +66,7 @@
   }
   .lang[lang="en"] { font-family: var(--title); font-weight: 400; letter-spacing: 1px; padding-top: 7px; }
   .logo { display: block; width: min(80%, 340px); height: auto; margin: 6px auto 8px; filter: drop-shadow(0 8px 14px rgba(10, 14, 48, 0.25)); }
-  .tagline { margin: 0; color: var(--white); font-weight: 800; font-size: 17px; text-shadow: 0 2px 0 rgba(26, 29, 69, 0.55); }
+  .tagline { margin: 0; color: var(--white); font-weight: 800; font-size: 17px; letter-spacing: 0.2px; text-shadow: var(--outline); }
   .spark { position: absolute; width: 8px; height: 8px; background: var(--white); opacity: 0.9;
     box-shadow: 8px 0 0 var(--white), -8px 0 0 var(--white), 0 8px 0 var(--white), 0 -8px 0 var(--white); }
   .spark.y { background: var(--yellow); box-shadow: 8px 0 0 var(--yellow), -8px 0 0 var(--yellow), 0 8px 0 var(--yellow), 0 -8px 0 var(--yellow); }
@@ -129,12 +132,12 @@
   .soc svg { width: 22px; height: 22px; flex: none; }
 
   /* footer */
-  footer { margin-top: 30px; text-align: center; color: var(--white); font-size: 14px; line-height: 1.6; text-shadow: 0 1px 0 rgba(26, 29, 69, 0.6); }
+  footer { margin-top: 30px; text-align: center; color: var(--white); font-size: 15px; font-weight: 800; line-height: 1.75; letter-spacing: 0.2px; text-shadow: var(--outline); }
   footer .bit { display: block; width: 92px; height: auto; margin: 0 auto 8px; filter: drop-shadow(0 6px 10px rgba(10, 14, 48, 0.25)); }
   footer p { margin: 4px 0; }
-  footer a { font-weight: 800; }
+  footer a { font-weight: 800; text-decoration-thickness: 2px; text-underline-offset: 4px; }
   .mail { direction: ltr; unicode-bidi: isolate; }
-  .small { opacity: 0.9; font-size: 13px; }
+  .small { font-size: 13.5px; }
   @media (max-width: 360px) { .social { grid-template-columns: repeat(2, 1fr); } .badges img, .featured .badges img { height: 38px; } }
   @media (prefers-reduced-motion: reduce) { .badges a { transition: none; } }
 </style>
