@@ -76,7 +76,18 @@
     font-size: 28px; letter-spacing: 1px; line-height: 1.1;
     -webkit-text-stroke: 6px var(--navy); paint-order: stroke fill; text-shadow: 0 4px 0 var(--navy);
   }
-  html[dir="rtl"] .section { font-family: var(--ar-title); font-weight: 800; font-size: 30px; letter-spacing: 0; }
+  /* Arabic: text-stroke draws miter spikes on the sharp Arabic glyph corners (under ب / ن dots), so the outline is a
+     ring of round text-shadows instead, then the same 4px navy extrusion. */
+  html[dir="rtl"] .section {
+    font-family: var(--ar-title); font-weight: 800; font-size: 30px; letter-spacing: 0; line-height: 1.35;
+    -webkit-text-stroke: 0; paint-order: normal;
+    text-shadow:
+      3px 0 0 var(--navy), -3px 0 0 var(--navy), 0 3px 0 var(--navy), 0 -3px 0 var(--navy),
+      2.1px 2.1px 0 var(--navy), -2.1px 2.1px 0 var(--navy), 2.1px -2.1px 0 var(--navy), -2.1px -2.1px 0 var(--navy),
+      2.8px 1.2px 0 var(--navy), -2.8px 1.2px 0 var(--navy), 2.8px -1.2px 0 var(--navy), -2.8px -1.2px 0 var(--navy),
+      1.2px 2.8px 0 var(--navy), -1.2px 2.8px 0 var(--navy), 1.2px -2.8px 0 var(--navy), -1.2px -2.8px 0 var(--navy),
+      0 7px 0 var(--navy), 3px 6px 0 var(--navy), -3px 6px 0 var(--navy), 2px 5px 0 var(--navy), -2px 5px 0 var(--navy);
+  }
 
   /* game cards */
   .games { display: grid; gap: 22px; }
