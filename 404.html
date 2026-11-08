@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found – MM4GAMES</title>
+<script>
+  // Any spelling of /mm4games (mm4games, Mm4games, MM4GAMES…) opens the games page at /MM4Games/
+  (function () {
+    var m = location.pathname.match(/^\/mm4games(\/.*)?$/i);
+    if (m && location.pathname.indexOf('/MM4Games') !== 0) location.replace('/MM4Games' + (m[1] || '/') + location.search + location.hash);
+  })();
+</script>
+<style>
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center;
+    background: radial-gradient(ellipse 130% 85% at 50% 28%, #6FD0FF 0%, #2EA7FF 48%, #1479D6 100%); color: #fff; font-family: system-ui, sans-serif; padding: 24px; }
+  h1 { margin: 0; font-size: 26px; text-shadow: 0 2px 0 rgba(26,29,69,.5); }
+  a { display: inline-block; background: #1A1D45; color: #fff; border: 3px solid #fff; border-radius: 999px; padding: 10px 18px; font-weight: 800; text-decoration: none; }
+</style>
+</head>
+<body>
+  <h1>Page not found</h1>
+  <p dir="rtl" lang="ar" style="margin:0;font-size:18px;font-weight:700">الصفحة غير موجودة</p>
+  <a href="/MM4Games/">MM4GAMES – Our games · ألعابنا</a>
+</body>
+</html>
